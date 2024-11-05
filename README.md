@@ -4,9 +4,9 @@ Check `script` for usage examples.
 
 ## Tests
 
-1. Run `anvil` on a separate terminal.
+1. Run `anvil`.
 
-2. On another terminal, run the following command. It will deploy a `HelloWorld` contract and write to `deployment.json`
+2. On another terminal, run the following command. It will deploy a contract and writes its name and address to `deployment.json`
 
 ```sh
 forge script \
