@@ -5,19 +5,24 @@ pragma solidity ^0.8.27;
 import "forge-std/console.sol";
 import {DeploymentReaderScript, DeploymentWriterScript} from "../src/DeploymentScript.sol";
 
-contract ExampleDeploymentReaderScript is DeploymentReaderScript {
-    function setUp() external {
-        loadDeployment();
+contract HelloWorld {
+    function say() external pure returns (string memory) {
+        return "Hello, world!";
     }
+}
 
-    function run() external view {
-        console.log(getContract("Foo"));
+contract ExampleDeploymentReaderScript is DeploymentReaderScript {
+    function run() external {
+        loadDeployment();
+        console.log(HelloWorld(getContract("HelloWorld")).say());
     }
 }
 
 contract ExampleDeploymentWriterScript is DeploymentWriterScript {
     function run() external {
-        addContract("Foo", address(this));
+        vm.startBroadcast();
+        addContract("HelloWorld", address(new HelloWorld()));
+        vm.stopBroadcast();
         storeDeployment();
     }
 }
